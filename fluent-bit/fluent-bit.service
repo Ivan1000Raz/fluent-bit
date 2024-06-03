@@ -1,0 +1,16 @@
+[Unit]
+Description=Fluent Bit
+Documentation=https://docs.fluentbit.io/manual/
+Requires=network.target
+After=network.target
+
+[Service]
+Environment="AWS_SHARED_CREDENTIALS_FILE=/root/.aws/credentials"
+Type=simple
+EnvironmentFile=-/etc/sysconfig/fluent-bit
+EnvironmentFile=-/etc/default/fluent-bit
+ExecStart=/opt/fluent-bit/bin/fluent-bit -c //etc/fluent-bit/fluent-bit.conf
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
