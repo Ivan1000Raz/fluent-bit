@@ -1,0 +1,18 @@
+- name: Copy file from Git
+  hosts: server1 
+  become: true
+
+  tasks:
+   - name: ping
+     ping:
+
+   - name: Clone git repo
+     ansible.builtin.git:
+       repo: 'https://github.com/Ivan1000Raz/fluent-bit.git'
+       clone: true  
+       dest: ~/git/
+       version: main
+   
+   - name: Execute the script
+     ansible.builtin.command:
+       cmd: sh ~/git/fluent-bit/install.sh
